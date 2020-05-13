@@ -1,6 +1,6 @@
-package com.system.Ijconnect.user;
+package com.system.Ijconnect.Alumni;
 
-public class UserResponse {
+public class Response {
 	
 	private int statusCode;
 	private String statusMessage;

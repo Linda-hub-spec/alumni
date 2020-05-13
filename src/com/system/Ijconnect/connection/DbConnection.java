@@ -13,7 +13,7 @@ public class DbConnection {
 	private static String URL = "jdbc:mysql://localhost:3306/ij_connect?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&useSSL=false&serverTimezone=UTC";
 	
 	
-	public Connection Dbconnection() {
+	public  Connection Dbconnection() {
 		try {
 			Class.forName(DRIVER);
 			con = DriverManager.getConnection(URL,USERNAME,PASSWORD);
@@ -25,5 +25,10 @@ public class DbConnection {
 		}
 		return null;
 	}
+	
+	/*public static void main(String [] arg) {
+		Connection con ;
+		con= Dbconnection();
+	}*/
 
 }
