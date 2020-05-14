@@ -1,4 +1,4 @@
-package com.system.Ijconnect.Alumni;
+package com.system.Alumni;
 
 public class Response {
 	

@@ -1,11 +1,11 @@
-package com.system.Ijconnect.Alumni;
+package com.system.Alumni;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import com.system.Ijconnect.connection.DbConnection;
+import com.system.connection.DbConnection;
 
 public class AlumniDao {
 	
@@ -23,28 +23,35 @@ public class AlumniDao {
 	//add new user
 	public Response saveAlumni(Alumni user) {
 		
+		Connection conn = null;
+		PreparedStatement statement = null;
+		ResultSet result = null;
+		Response response = new Response();
 		System.out.println("**** in saveAlumni ****");
 	
 		try {
 			DbConnection dbConnection = new DbConnection ();
 			conn = dbConnection.Dbconnection();
 			System.out.println("***** database connected *****");
-			sql = "INSERT INTO alumni (firstname,lastname,inyear,graduatedyear,occupation,maritalstatus,email,contactaddress,contactphone) VALUES (?,?,?,?,?,?,?,?,?)";
+			sql = "INSERT INTO alumni (alumniId,firstname,lastname,inyear,graduatedyear,occupation,maritalstatus,email,contactaddress,contactphone) VALUES (?,?,?,?,?,?,?,?,?,?)";
 			statement = conn.prepareStatement(sql);
 			
-			statement.setString(1, user.getFirstname());
-			statement.setString(2, user.getLastname());
-			statement.setString(3, user.getInYear());
-			statement.setString(4, user.getGraguatedYear());
-			statement.setString(5, user.getOccupation());
-			statement.setString(6, user.getMaritalStatus());
-			statement.setString(7, user.getEmail());
-			statement.setString(8, user.getContactAddress());
-			statement.setString(9, user.getContactPhone());
+			statement.setString(1, user.getAlumniId());
+			statement.setString(2, user.getFirstname());
+			statement.setString(3, user.getLastname());
+			statement.setString(4, user.getInYear());
+			statement.setString(5, user.getGraguatedYear());
+			statement.setString(6, user.getOccupation());
+			statement.setString(7, user.getMaritalStatus());
+			statement.setString(8, user.getEmail());
+			statement.setString(9, user.getContactAddress());
+			statement.setString(10, user.getContactPhone());
 			
 			result = statement.executeQuery();
+			if (result.next()) {
 			response.setStatusCode(NOTIFY_SUCCESS_CODE);
 			response.setStatusMessage(NOTIFY_SUCCESS_MESSAGE);
+			}
 			return response;
 			
 		}catch(SQLException e) {

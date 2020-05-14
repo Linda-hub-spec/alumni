@@ -1,12 +1,12 @@
-package com.system.Ijconnect.connection;
+package com.system.connection;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
+
 
 public class DbConnection {
 	
-	private static Connection con = null;
+	private static Connection con ;
 	private static String USERNAME = "root";
 	private static String PASSWORD = "";
 	private static String DRIVER = "com.mysql.cj.jdbc.Driver";
@@ -15,20 +15,25 @@ public class DbConnection {
 	
 	public  Connection Dbconnection() {
 		try {
+			System.out.println("**** in dbConnection class");
 			Class.forName(DRIVER);
 			con = DriverManager.getConnection(URL,USERNAME,PASSWORD);
-			System.out.println("----- Database connected -----");
+			return con;
 			
 		}catch(Exception e) {
+			
 			e.printStackTrace();
 			System.out.println("----- Database connection failed -----");
+			
 		}
+		System.out.println("----- Database connected -----");
 		return null;
 	}
 	
 	/*public static void main(String [] arg) {
-		Connection con ;
+		Connection con = null ;
 		con= Dbconnection();
-	}*/
-
+		System.out.println(con);
+	}
+*/
 }

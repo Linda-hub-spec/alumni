@@ -1,27 +1,30 @@
-package com.system.Ijconnect.Alumni;
+package com.system.Alumni.Controller;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import com.google.gson.Gson;
+import com.system.Alumni.Alumni;
+import com.system.Alumni.AlumniDao;
+import com.system.Alumni.Response;
 
 @Path("/AlumniServices")
-public class AlumniService {
+public class AlumniController {
 	
-	@PUT
+	@POST
 	@Path("/alumni")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public String createAlumni(String body) {
 		
+		Alumni alumni = new Gson().fromJson(body, Alumni.class);
 		
 		Response response = new Response();
-		Alumni alumni = new Gson().fromJson(body, Alumni.class);
 		Alumni data = new Alumni();
+		
 		data.setFirstname(alumni.getFirstname());
 		data.setLastname(alumni.getLastname());
 		data.setContactAddress(alumni.getContactAddress());

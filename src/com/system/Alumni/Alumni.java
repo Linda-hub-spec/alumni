@@ -1,7 +1,8 @@
-package com.system.Ijconnect.Alumni;
+package com.system.Alumni;
 
 public class Alumni {
 	
+	private String alumniId;
 	private String firstname;
 	private String lastname;
 	private String graguatedYear;
@@ -30,6 +31,15 @@ public class Alumni {
 		this.contactPhone = contactPhone;
 	}
 	
+	public String getAlumniId() {
+		return alumniId;
+	}
+
+	public void setAlumniId(String alumniId) {
+		alumniId = "NULL";
+		this.alumniId = alumniId;
+	}
+
 	public String getFirstname() {
 		return firstname;
 	}

@@ -2,7 +2,7 @@
     <wb-module deploy-name="IjConnect">
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
-        <property name="context-root" value="IjConnect"/>
         <property name="java-output-path" value="/IjConnect/build/classes"/>
+        <property name="context-root" value="IjConnect"/>
     </wb-module>
 </project-modules>
