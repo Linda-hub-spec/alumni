@@ -27,16 +27,17 @@ public class AlumniController {
 		
 		data.setFirstname(alumni.getFirstname());
 		data.setLastname(alumni.getLastname());
-		data.setContactAddress(alumni.getContactAddress());
-		data.setContactPhone(alumni.getContactPhone());
-		data.setEmail(alumni.getEmail());
 		data.setInYear(alumni.getInYear());
-		data.setGraguatedYear(alumni.getGraguatedYear());
+		data.setGraduatedYear(alumni.getGraduatedYear());
 		data.setOccupation(alumni.getOccupation());
 		data.setMaritalStatus(alumni.getMaritalStatus());
-		
+		data.setEmail(alumni.getEmail());
+		data.setContactAddress(alumni.getContactAddress());
+		data.setContactPhone(alumni.getContactPhone());
+			
 		AlumniDao dao = new AlumniDao();
 		response = dao.saveAlumni(data);
+		System.out.println(response);
 		System.out.println("*** end of saveAlumni ***");
 		String json = new Gson().toJson(response);
 		

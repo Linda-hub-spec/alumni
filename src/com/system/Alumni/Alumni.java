@@ -2,10 +2,10 @@ package com.system.Alumni;
 
 public class Alumni {
 	
-	private String alumniId;
+	private int alumniId;
 	private String firstname;
 	private String lastname;
-	private String graguatedYear;
+	private String graduatedYear;
 	private String inYear;
 	private String occupation;
 	private String maritalStatus;
@@ -17,12 +17,13 @@ public class Alumni {
 		
 	}
 	
-	public Alumni(String firstname, String lastname, String graguatedYear, String inYear, String occupation,
+	public Alumni(int alumniId, String firstname, String lastname, String graduatedYear, String inYear, String occupation,
 			String maritalStatus, String email, String contactAddress, String contactPhone) {
 		super();
+		this.alumniId = alumniId;
 		this.firstname = firstname;
 		this.lastname = lastname;
-		this.graguatedYear = graguatedYear;
+		this.graduatedYear = graduatedYear;
 		this.inYear = inYear;
 		this.occupation = occupation;
 		this.maritalStatus = maritalStatus;
@@ -31,12 +32,12 @@ public class Alumni {
 		this.contactPhone = contactPhone;
 	}
 	
-	public String getAlumniId() {
+	public int getAlumniId() {
 		return alumniId;
 	}
 
-	public void setAlumniId(String alumniId) {
-		alumniId = "NULL";
+	public void setAlumniId(int alumniId) {
+		
 		this.alumniId = alumniId;
 	}
 
@@ -56,12 +57,12 @@ public class Alumni {
 		this.lastname = lastname;
 	}
 	
-	public String getGraguatedYear() {
-		return graguatedYear;
+	public String getGraduatedYear() {
+		return graduatedYear;
 	}
 	
-	public void setGraguatedYear(String graguatedYear) {
-		this.graguatedYear = graguatedYear;
+	public void setGraduatedYear(String graduatedYear) {
+		this.graduatedYear = graduatedYear;
 	}
 	
 	public String getInYear() {
