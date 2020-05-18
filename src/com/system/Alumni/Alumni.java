@@ -12,13 +12,15 @@ public class Alumni {
 	private String email;
 	private String contactAddress;
 	private String contactPhone;
+	private String username;
+	private String password;
 	
 	public Alumni() {
 		
 	}
 	
 	public Alumni(int alumniId, String firstname, String lastname, String graduatedYear, String inYear, String occupation,
-			String maritalStatus, String email, String contactAddress, String contactPhone) {
+			String maritalStatus, String email, String contactAddress, String contactPhone, String username, String password) {
 		super();
 		this.alumniId = alumniId;
 		this.firstname = firstname;
@@ -30,6 +32,8 @@ public class Alumni {
 		this.email = email;
 		this.contactAddress = contactAddress;
 		this.contactPhone = contactPhone;
+		this.username = username;
+		this.password = password;
 	}
 	
 	public int getAlumniId() {
@@ -111,6 +115,22 @@ public class Alumni {
 	
 	public void setContactPhone(String contactPhone) {
 		this.contactPhone = contactPhone;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 }

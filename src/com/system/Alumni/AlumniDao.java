@@ -15,8 +15,9 @@ public class AlumniDao {
 	ResultSet result = null;
 	Response response = null;
 	String sql = null;
-	String NOTIFY_SUCCESS_MESSAGE = "Alumni added Successfully!!!";
+	String NOTIFY_SUCCESS_MESSAGE = "Alumni  Successfully!!!";
 	String NOTIFY_FAILURE_MESSAGE = "Alumni Failed!";
+	String NOTIFY_FAILURE_MESSAGE_02 = "Alumni Does not Exist!";
 	int NOTIFY_SUCCESS_CODE = 200;
 	int NOTIFY_FAILURE_CODE = 404;
 	
@@ -34,7 +35,9 @@ public class AlumniDao {
 			DbConnection dbConnection = new DbConnection ();
 			conn = dbConnection.getConnection();
 			System.out.println("***** database connected *****");
-			sql = "INSERT INTO alumni (firstname,lastname,inyear,graduatedyear,occupation,maritalstatus,email,contactaddress,contactphone) VALUES (?,?,?,?,?,?,?,?,?)";
+			sql = "INSERT INTO alumni (firstname,lastname,inyear,graduatedyear,"
+					+ "occupation,maritalstatus,email,contactaddress,contactphone,username,password) "
+					+ "VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 			preparedStatement = conn.prepareStatement(sql);
 			
 			preparedStatement.setString(1, user.getFirstname());
@@ -46,15 +49,18 @@ public class AlumniDao {
 			preparedStatement.setString(7, user.getEmail());
 			preparedStatement.setString(8, user.getContactAddress());
 			preparedStatement.setString(9, user.getContactPhone());
+			preparedStatement.setString(10, user.getUsername());
+			preparedStatement.setString(11, user.getPassword());
 			
 			Boolean resultKey = preparedStatement.execute();
 			 
-			if (resultKey != false) {
+			//if (resultKey != false) {
 				
 			response.setStatusCode(NOTIFY_SUCCESS_CODE);
 			response.setStatusMessage(NOTIFY_SUCCESS_MESSAGE);
+			//System.out.println(response.getStatusCode() +  response.getStatusMessage());
 			
-			}
+			///}
 			return response;
 			
 		}catch(SQLException e) {
@@ -68,7 +74,7 @@ public class AlumniDao {
 	}
 	
 	
-	public static void main(String [] args) {
+	/*public static void main(String [] args) {
 		Alumni user = new Alumni();
 		user.setFirstname("wisdom");
 		user.setLastname("peter");
@@ -82,33 +88,9 @@ public class AlumniDao {
 		Response response = new Response();
 		response = new AlumniDao().saveAlumni(user);
 		System.out.println(response);
-	}
+	}*/
 	
-	//add login details
-	public Response saveLoginData(AlumniLoginData user) {
-		
-		DbConnection dbConnection = new DbConnection ();
-		conn = dbConnection.getConnection();
-		sql = "INSERT INTO alumnilogin (alimniId, username, password) values (?,?,?)";
-		try {
-			
-			statement = conn.prepareStatement(sql);
-			statement.setString(1, user.getAlumniId());
-			statement.setString(2, user.getUsername());
-			statement.setString(3, user.getPassword());
-			result = statement.executeQuery();
-			response.setStatusCode(NOTIFY_SUCCESS_CODE);
-			response.setStatusMessage(NOTIFY_SUCCESS_MESSAGE);
-			return response;
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-			response.setStatusCode(NOTIFY_FAILURE_CODE);
-			response.setStatusMessage(NOTIFY_FAILURE_MESSAGE);
-			return response;
-		}
-		
-	}
+	
 	
 	//update existing ALUMNI
 	// you get the alumniId from login table using the username and password
@@ -151,15 +133,45 @@ public class AlumniDao {
 		
 	}
 	
-	//delete user
-	public Response deleteUser(Alumni user) {
+	//validate login
+	public Response validateAlumni(AlumniLoginData user) {
+		Connection conn = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet result = null;
+		Response response = new Response();
 		
 		try {
-					
-			}catch(Exception e) {
-				e.printStackTrace();
+			
+			DbConnection dbConnection = new DbConnection ();
+			conn = dbConnection.getConnection();
+			sql = "SELECT * FROM alumni WHERE username = ? AND password = ? ";
+		
+			preparedStatement = conn.prepareStatement(sql);
+			preparedStatement.setString(1, user.getUsername());
+			preparedStatement.setString(2, user.getPassword());
+			
+			result = preparedStatement.executeQuery();
+			if (result.next()) {
+				
+				response.setStatusCode(NOTIFY_SUCCESS_CODE);
+				response.setStatusMessage(NOTIFY_SUCCESS_MESSAGE);
+				return response;
+			}else {
+				
+				response.setStatusCode(NOTIFY_FAILURE_CODE);
+				response.setStatusMessage(NOTIFY_FAILURE_MESSAGE_02);
+				return response;
 			}
-			return response; 
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+			response.setStatusCode(NOTIFY_FAILURE_CODE);
+			response.setStatusMessage(NOTIFY_FAILURE_MESSAGE);
+			return response;
+		}
+		
+		
+			
 	}
 	
 	
